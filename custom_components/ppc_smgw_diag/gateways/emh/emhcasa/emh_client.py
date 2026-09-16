@@ -32,6 +32,7 @@ class EMHCasaClient:
         self.httpx_client = httpx_client
         self.logger = logger
         self._metadata_probe_done = False
+        self._firmware_version: str | None = None
 
         self.httpx_client.headers.setdefault("Content-Type", "application/json")
         self.httpx_client.follow_redirects = True
@@ -57,7 +58,7 @@ class EMHCasaClient:
     async def _probe_metadata_endpoints(self) -> str | None:
         """Read the EMH firmware version once per client instance."""
         if self._metadata_probe_done:
-            return None
+            return self._firmware_version
 
         self._metadata_probe_done = True
         url = f"{self.base_url}/json/systeminformations"
@@ -78,6 +79,7 @@ class EMHCasaClient:
             firmware_value = payload.get("firmwareversion")
             if firmware_value:
                 firmware = str(firmware_value).split("/", 1)[0].strip()
+                self._firmware_version = firmware
                 self.logger.info("Discovered EMH firmware version: %s", firmware)
                 return firmware
         except Exception as err:

@@ -209,3 +209,5 @@ class TestGetReadings:
         firmware = await c._probe_metadata_endpoints()
 
         assert firmware == "CASA-1.2.3"
+        assert await c._probe_metadata_endpoints() == "CASA-1.2.3"
+        c.httpx_client.get.assert_awaited_once()
