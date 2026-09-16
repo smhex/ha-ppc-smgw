@@ -49,7 +49,7 @@ ignore = [
 
 [lint.isort]
 force-sort-within-sections = true
-known-first-party = ["custom_components.ppc_smgw"]
+known-first-party = ["custom_components.ppc_smgw_diag"]
 combine-as-imports = true
 
 [lint.flake8-pytest-style]

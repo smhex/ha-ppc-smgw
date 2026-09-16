@@ -1,14 +1,14 @@
 {
-  "domain": "ppc_smgw",
-  "name": "PPC SMGW",
+  "domain": "ppc_smgw_diag",
+  "name": "PPC SMGW Diagnostics",
   "codeowners": [
     "@jannickfahlbusch"
   ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/jannickfahlbusch/ha-ppc-smgw",
+  "documentation": "https://github.com/smhex/ha-ppc-smgw",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/jannickfahlbusch/ha-ppc-smgw/issues",
+  "issue_tracker": "https://github.com/smhex/ha-ppc-smgw/issues",
   "requirements": [
     "beautifulsoup4>=4.13.3",
     "obis-parser==0.0.2",

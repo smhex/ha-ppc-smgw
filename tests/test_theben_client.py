@@ -7,7 +7,7 @@ import httpx
 from obis_parser import OBIS
 import pytest
 
-from custom_components.ppc_smgw.gateways.theben.conexa.conexa import (
+from custom_components.ppc_smgw_diag.gateways.theben.conexa.conexa import (
     ThebenConexaClient,
     ThebenMD5DigestAuth,
 )

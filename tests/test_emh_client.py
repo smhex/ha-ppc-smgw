@@ -7,7 +7,7 @@ import httpx
 from obis_parser import OBIS
 import pytest
 
-from custom_components.ppc_smgw.gateways.emh.emhcasa.emh_client import EMHCasaClient
+from custom_components.ppc_smgw_diag.gateways.emh.emhcasa.emh_client import EMHCasaClient
 
 # ---------------------------------------------------------------------------
 # Anonymised fixture data matching real device response shapes

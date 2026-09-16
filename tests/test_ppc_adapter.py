@@ -8,14 +8,14 @@ from obis_parser import OBIS
 from py_ppc_smgw.types import FirmwareVersion, Meter, Reading as LibReading
 import pytest
 
-from custom_components.ppc_smgw.gateways.ppc.const import (
+from custom_components.ppc_smgw_diag.gateways.ppc.const import (
     DEFAULT_MODEL,
     MANUFACTURER,
 )
-from custom_components.ppc_smgw.gateways.ppc.ppc_smgw import PPC_SMGW
-from custom_components.ppc_smgw.gateways.reading import Information, Reading
+from custom_components.ppc_smgw_diag.gateways.ppc.ppc_smgw import PPC_SMGW
+from custom_components.ppc_smgw_diag.gateways.reading import Information, Reading
 
-_ADAPTER = "custom_components.ppc_smgw.gateways.ppc.ppc_smgw"
+_ADAPTER = "custom_components.ppc_smgw_diag.gateways.ppc.ppc_smgw"
 
 
 def _make_adapter() -> PPC_SMGW:

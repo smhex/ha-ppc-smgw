@@ -13,15 +13,15 @@ from homeassistant.const import (
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.ppc_smgw.const import (
+from custom_components.ppc_smgw_diag.const import (
     CONF_METER_TYPE,
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
 )
-from custom_components.ppc_smgw.gateways.emh import const as emh_const
-from custom_components.ppc_smgw.gateways.ppc import const as ppc_const
-from custom_components.ppc_smgw.gateways.theben import const as theben_const
-from custom_components.ppc_smgw.gateways.vendors import Vendor
+from custom_components.ppc_smgw_diag.gateways.emh import const as emh_const
+from custom_components.ppc_smgw_diag.gateways.ppc import const as ppc_const
+from custom_components.ppc_smgw_diag.gateways.theben import const as theben_const
+from custom_components.ppc_smgw_diag.gateways.vendors import Vendor
 
 
 @pytest.fixture

@@ -1,8 +1,8 @@
-# ha-ppc-smgw
+# ha-ppc-smgw-diagnostics
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jannickfahlbusch&repository=ha-ppc-smgw&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=smhex&repository=ha-ppc-smgw&category=integration)
 
-HomeAssistant component to read SMGWs.
+HomeAssistant component to read SMGWs in parallel with the official integration and inspect gateway communication.
 
 This custom integration allows you to integrate the following Smart Meter Gateways into HomeAssistant:
 * PPC SMGW
@@ -15,9 +15,9 @@ This component is installable via [HACS](https://www.hacs.xyz/).
 
 Add the repository as a custom repository using [this guide](https://www.hacs.xyz/docs/faq/custom_repositories/).
 
-Click on the badge above or use this [link](https://my.home-assistant.io/redirect/hacs_repository/?owner=jannickfahlbusch&repository=ha-ppc-smgw) to get redirected to the HACS store from where you can install the component.
+Click on the badge above or use this [link](https://my.home-assistant.io/redirect/hacs_repository/?owner=smhex&repository=ha-ppc-smgw) to get redirected to the HACS store from where you can install the component.
 
-Restart your instance and head over to the integration overview (Or use [this link](https://my.home-assistant.io/redirect/config_flow_start/?domain=ppc_smgw) to directly go to the configuration of this component) to start configuring the integration.
+Restart your instance and head over to the integration overview (Or use [this link](https://my.home-assistant.io/redirect/config_flow_start/?domain=ppc_smgw_diag) to directly go to the configuration of this component) to start configuring the integration.
 
 ## Requirements
 

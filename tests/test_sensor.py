@@ -11,16 +11,16 @@ from homeassistant.helpers.entity import EntityCategory
 from obis_parser import OBIS, OBIS_CATALOG
 import pytest
 
-from custom_components.ppc_smgw import sensor as sensor_module
-from custom_components.ppc_smgw.const import (
+from custom_components.ppc_smgw_diag import sensor as sensor_module
+from custom_components.ppc_smgw_diag.const import (
     SENSOR_TYPES,
     FirmwareVersionSensorDescription,
     LastUpdatedSensorDescription,
 )
-from custom_components.ppc_smgw.coordinator import Data
-from custom_components.ppc_smgw.gateways.reading import Information, Reading
-from custom_components.ppc_smgw.obis_ha import OBISSensorSpec
-from custom_components.ppc_smgw.sensor import (
+from custom_components.ppc_smgw_diag.coordinator import Data
+from custom_components.ppc_smgw_diag.gateways.reading import Information, Reading
+from custom_components.ppc_smgw_diag.obis_ha import OBISSensorSpec
+from custom_components.ppc_smgw_diag.sensor import (
     FirmwareSensor,
     LastUpdatedSensor,
     OBISSensor,
@@ -86,7 +86,7 @@ class _FakeEntityRegistry:
     def async_get_entity_id(self, domain, platform, unique_id):
         self.looked_up_unique_ids.append(unique_id)
         assert domain == "sensor"
-        assert platform == "ppc_smgw"
+        assert platform == "ppc_smgw_diag"
         return self.entity_ids_by_unique_id.get(unique_id)
 
     def async_remove(self, entity_id):
