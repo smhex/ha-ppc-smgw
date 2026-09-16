@@ -54,16 +54,21 @@ class EMHCasaClient:
 
     async def discover_all_meter_ids(self) -> list[str]:
         """Return all meter IDs available on this gateway via /json/metering/origin/."""
-        self.logger.debug(f"Discovering all meter IDs from {self.base_url}")
+        url = f"{self.base_url}/json/metering/origin/"
+        self.logger.debug("Discovering all meter IDs from %s", url)
 
         try:
             response = await self.httpx_client.get(
-                f"{self.base_url}/json/metering/origin/",
+                url,
                 auth=self._get_auth(),
                 timeout=10,
             )
             self.logger.debug(
-                f"Got meter list: \nStatus code: {response.status_code}\nRaw response: {response.text}"
+                "SMGW response: method=GET url=%s status=%s content_type=%s body=%r",
+                url,
+                response.status_code,
+                response.headers.get("content-type"),
+                response.text,
             )
             meter_ids: list[str] = response.json()
         except Exception as e:
@@ -81,7 +86,7 @@ class EMHCasaClient:
         return None
 
     async def _get_readings(self) -> dict[OBIS, Reading]:
-        self.logger.debug(f"Getting readings from {self.base_url}")
+        self.logger.debug("Getting readings from %s", self.base_url)
 
         if self.meter_id is None:
             self.meter_id = await self._discover_meter_id()
@@ -90,13 +95,18 @@ class EMHCasaClient:
                 return {}
 
         try:
+            url = f"{self.base_url}/json/metering/origin/{self.meter_id}/extended"
             response = await self.httpx_client.get(
-                f"{self.base_url}/json/metering/origin/{self.meter_id}/extended",
+                url,
                 auth=self._get_auth(),
                 timeout=10,
             )
             self.logger.debug(
-                f"Got meter readings: \nStatus code: {response.status_code}\nRaw response: {response.text}"
+                "SMGW response: method=GET url=%s status=%s content_type=%s body=%r",
+                url,
+                response.status_code,
+                response.headers.get("content-type"),
+                response.text,
             )
             meter_reading = response.json()
         except Exception as e:
