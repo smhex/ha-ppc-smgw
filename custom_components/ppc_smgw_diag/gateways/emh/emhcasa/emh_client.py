@@ -75,9 +75,9 @@ class EMHCasaClient:
                 response.text,
             )
             payload = response.json()
-            firmware_versions = payload.get("systeminfo", {}).get("firmwareversion", [])
-            if firmware_versions:
-                firmware = str(firmware_versions[0])
+            firmware_value = payload.get("firmwareversion")
+            if firmware_value:
+                firmware = str(firmware_value).split("/", 1)[0].strip()
                 self.logger.info("Discovered EMH firmware version: %s", firmware)
                 return firmware
         except Exception as err:
