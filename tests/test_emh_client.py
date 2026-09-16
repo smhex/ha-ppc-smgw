@@ -184,6 +184,7 @@ class TestGetReadings:
 
     async def test_get_data_returns_information(self):
         c = _make_client()
+        c._metadata_probe_done = True
         c.httpx_client.get = AsyncMock(
             side_effect=[
                 _make_response([_METER_ID]),
@@ -193,3 +194,18 @@ class TestGetReadings:
         info = await c.get_data()
         assert info.name == "EMH SMGW"
         assert len(info.readings) == 3
+
+    async def test_probe_extracts_firmware_version(self):
+        c = _make_client()
+        c.httpx_client.get = AsyncMock(
+            side_effect=[
+                _make_response("Not Found", status_code=404),
+                _make_response(
+                    {"device": {"firmware-version": "CASA-1.2.3"}}
+                ),
+            ]
+        )
+
+        firmware = await c._probe_metadata_endpoints()
+
+        assert firmware == "CASA-1.2.3"
