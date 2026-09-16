@@ -199,7 +199,10 @@ class TestGetReadings:
         c = _make_client()
         c.httpx_client.get = AsyncMock(
             return_value=_make_response(
-                {"systeminfo": {"firmwareversion": ["CASA-1.2.3"]}}
+                {
+                    "firmwareversion": "CASA-1.2.3 / ef5018df6ece2958",
+                    "huid": "eemh0015535256",
+                }
             )
         )
 
