@@ -198,12 +198,9 @@ class TestGetReadings:
     async def test_probe_extracts_firmware_version(self):
         c = _make_client()
         c.httpx_client.get = AsyncMock(
-            side_effect=[
-                _make_response("Not Found", status_code=404),
-                _make_response(
-                    {"device": {"firmware-version": "CASA-1.2.3"}}
-                ),
-            ]
+            return_value=_make_response(
+                {"systeminfo": {"firmwareversion": ["CASA-1.2.3"]}}
+            )
         )
 
         firmware = await c._probe_metadata_endpoints()
