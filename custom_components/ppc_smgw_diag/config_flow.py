@@ -91,7 +91,7 @@ def build_username_password_schema(
         schema[vol.Optional(CONF_DEBUG, default=default_debug)] = bool
 
     if default_meter_id is not None:
-        schema[vol.Required(emh_const.CONF_METER_ID, default=default_meter_id)] = str
+        schema[vol.Optional(emh_const.CONF_METER_ID, default="")] = str
 
     return vol.Schema(schema)
 
