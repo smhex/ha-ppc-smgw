@@ -271,6 +271,31 @@ class TestConfigFlow:
 class TestOptionsFlow:
     """Test the options flow for PPC SMGW integration."""
 
+    async def test_options_flow_can_clear_emh_meter_id(
+        self, hass: HomeAssistant, emh_config_data
+    ):
+        """An explicitly empty EMH meter ID enables automatic discovery."""
+        entry = create_mock_config_entry(
+            data={**emh_config_data, CONF_METER_ID: "1test000000001"}
+        )
+        hass.config_entries._entries[entry.entry_id] = entry
+        options_flow = PPCSMGWLocalOptionsFlowHandler(entry)
+        options_flow.hass = hass
+
+        result = await options_flow.async_step_user(
+            user_input={
+                "name": emh_config_data["name"],
+                "host": emh_config_data[CONF_HOST],
+                "username": emh_config_data[CONF_USERNAME],
+                CONF_PASSWORD: "",
+                CONF_SCAN_INTERVAL: emh_config_data[CONF_SCAN_INTERVAL],
+                CONF_METER_ID: "",
+            }
+        )
+
+        assert result["type"] == FlowResultType.CREATE_ENTRY
+        assert entry.data[CONF_METER_ID] == ""
+
     async def test_options_flow_updates_config(
         self, hass: HomeAssistant, ppc_config_data
     ):
