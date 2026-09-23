@@ -5,7 +5,7 @@ import logging
 
 import httpx
 
-from custom_components.ppc_smgw.gateways.reading import Information
+from custom_components.ppc_smgw_diag.gateways.reading import Information
 
 
 class Gateway(ABC):

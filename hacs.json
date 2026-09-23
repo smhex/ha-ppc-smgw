@@ -1,5 +1,5 @@
 {
-  "name": "PPC SMGW",
+  "name": "PPC SMGW Diagnostics",
   "homeassistant": "2026.3.0",
   "content_in_root": false,
   "render_readme": true

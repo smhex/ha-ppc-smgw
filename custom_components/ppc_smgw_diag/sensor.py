@@ -10,7 +10,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util import slugify
 from obis_parser import OBIS
 
-from custom_components.ppc_smgw.gateways.reading import Information
+from custom_components.ppc_smgw_diag.gateways.reading import Information
 
 from .const import (
     SENSOR_TYPES,

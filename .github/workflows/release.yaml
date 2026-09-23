@@ -35,7 +35,7 @@ jobs:
         env:
           BUMP_TYPE: ${{ github.event.inputs.bump_type }}
         run: |
-          CURRENT=$(jq -r '.version' custom_components/ppc_smgw/manifest.json)
+          CURRENT=$(jq -r '.version' custom_components/ppc_smgw_diag/manifest.json)
           echo "Current version: $CURRENT"
 
           # Strip any existing pre-release suffix (-alpha.x or aN.x)
@@ -67,12 +67,12 @@ jobs:
         run: |
           tmp=$(mktemp)
           jq --arg v "$NEW_VERSION" '.version = $v' \
-            custom_components/ppc_smgw/manifest.json > "$tmp"
+            custom_components/ppc_smgw_diag/manifest.json > "$tmp"
           [ -s "$tmp" ] || { echo "jq produced empty output"; exit 1; }
-          mv "$tmp" custom_components/ppc_smgw/manifest.json
+          mv "$tmp" custom_components/ppc_smgw_diag/manifest.json
 
       - name: Validate manifest.json
-        run: jq . custom_components/ppc_smgw/manifest.json > /dev/null
+        run: jq . custom_components/ppc_smgw_diag/manifest.json > /dev/null
 
       - name: Commit and tag
         env:
@@ -81,7 +81,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add custom_components/ppc_smgw/manifest.json
+          git add custom_components/ppc_smgw_diag/manifest.json
           git commit -m "chore: release v${NEW_VERSION} [skip ci]"
           git tag "v${NEW_VERSION}"
           git push origin main

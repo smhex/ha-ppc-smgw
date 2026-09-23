@@ -15,11 +15,11 @@ from homeassistant.helpers.httpx_client import create_async_httpx_client
 from homeassistant.loader import async_get_loaded_integration
 import voluptuous as vol
 
-from custom_components.ppc_smgw.gateways.emh.emh import EMHGateway
-from custom_components.ppc_smgw.gateways.gateway import Gateway
-from custom_components.ppc_smgw.gateways.ppc.ppc_smgw import PPC_SMGW
-from custom_components.ppc_smgw.gateways.theben.theben import ThebenConexa
-from custom_components.ppc_smgw.gateways.vendors import Vendor
+from custom_components.ppc_smgw_diag.gateways.emh.emh import EMHGateway
+from custom_components.ppc_smgw_diag.gateways.gateway import Gateway
+from custom_components.ppc_smgw_diag.gateways.ppc.ppc_smgw import PPC_SMGW
+from custom_components.ppc_smgw_diag.gateways.theben.theben import ThebenConexa
+from custom_components.ppc_smgw_diag.gateways.vendors import Vendor
 
 from .const import (
     CONF_METER_TYPE,

@@ -14,13 +14,13 @@ from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
 import pytest
 
-from custom_components.ppc_smgw.config_flow import (
+from custom_components.ppc_smgw_diag.config_flow import (
     PPC_SMGLocalConfigFlow,
     PPCSMGWLocalOptionsFlowHandler,
 )
-from custom_components.ppc_smgw.const import CONF_METER_TYPE
-from custom_components.ppc_smgw.gateways.emh.const import CONF_METER_ID
-from custom_components.ppc_smgw.gateways.vendors import Vendor
+from custom_components.ppc_smgw_diag.const import CONF_METER_TYPE
+from custom_components.ppc_smgw_diag.gateways.emh.const import CONF_METER_ID
+from custom_components.ppc_smgw_diag.gateways.vendors import Vendor
 from tests.conftest import create_mock_config_entry
 
 
@@ -169,7 +169,7 @@ class TestConfigFlow:
         flow.data = {CONF_METER_TYPE: Vendor.PPC}
 
         with patch(
-            "custom_components.ppc_smgw.config_flow._host_username_combination_exists",
+            "custom_components.ppc_smgw_diag.config_flow._host_username_combination_exists",
             return_value=True,
         ):
             result = await flow.async_step_connection_info(
@@ -254,7 +254,7 @@ class TestConfigFlow:
                 flow, "_discover_emh_meter_ids", return_value=["1test000000001"]
             ),
             patch(
-                "custom_components.ppc_smgw.config_flow._host_username_combination_exists",
+                "custom_components.ppc_smgw_diag.config_flow._host_username_combination_exists",
                 return_value=True,
             ),
         ):
@@ -348,7 +348,7 @@ class TestOptionsFlow:
         options_flow.hass = hass
 
         with patch(
-            "custom_components.ppc_smgw.config_flow._host_username_combination_exists",
+            "custom_components.ppc_smgw_diag.config_flow._host_username_combination_exists",
             return_value=True,
         ):
             result = await options_flow.async_step_user(

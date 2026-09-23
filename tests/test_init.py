@@ -13,21 +13,21 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 import pytest
 
-from custom_components.ppc_smgw import (
+from custom_components.ppc_smgw_diag import (
     async_migrate_entry,
     async_setup_entry,
     async_unload_entry,
 )
-from custom_components.ppc_smgw.const import (
+from custom_components.ppc_smgw_diag.const import (
     CONF_METER_TYPE,
     DOMAIN,
 )
-from custom_components.ppc_smgw.coordinator import (
+from custom_components.ppc_smgw_diag.coordinator import (
     Data,
     SMGwDataUpdateCoordinator,
 )
-from custom_components.ppc_smgw.gateways.reading import Information, Reading
-from custom_components.ppc_smgw.gateways.vendors import Vendor
+from custom_components.ppc_smgw_diag.gateways.reading import Information, Reading
+from custom_components.ppc_smgw_diag.gateways.vendors import Vendor
 from tests.conftest import create_mock_config_entry
 
 
@@ -48,17 +48,17 @@ class TestInit:
         mock_coordinator.async_config_entry_first_refresh = AsyncMock()
 
         with (
-            patch("custom_components.ppc_smgw.PPC_SMGW", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.ThebenConexa", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.EMHGateway", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.create_async_httpx_client"),
+            patch("custom_components.ppc_smgw_diag.PPC_SMGW", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.ThebenConexa", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.EMHGateway", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.create_async_httpx_client"),
             patch(
-                "custom_components.ppc_smgw.async_get_loaded_integration",
+                "custom_components.ppc_smgw_diag.async_get_loaded_integration",
                 return_value=mock_integration,
             ),
             patch.object(hass.config_entries, "async_forward_entry_setups"),
             patch(
-                "custom_components.ppc_smgw.SMGwDataUpdateCoordinator",
+                "custom_components.ppc_smgw_diag.SMGwDataUpdateCoordinator",
                 return_value=mock_coordinator,
             ),
         ):
@@ -93,14 +93,14 @@ class TestInit:
         )
 
         with (
-            patch("custom_components.ppc_smgw.PPC_SMGW", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.create_async_httpx_client"),
+            patch("custom_components.ppc_smgw_diag.PPC_SMGW", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.create_async_httpx_client"),
             patch(
-                "custom_components.ppc_smgw.async_get_loaded_integration",
+                "custom_components.ppc_smgw_diag.async_get_loaded_integration",
                 return_value=mock_integration,
             ),
             patch(
-                "custom_components.ppc_smgw.SMGwDataUpdateCoordinator",
+                "custom_components.ppc_smgw_diag.SMGwDataUpdateCoordinator",
                 return_value=mock_coordinator,
             ),
         ):
@@ -124,15 +124,15 @@ class TestInit:
         ppc_cls = MagicMock(return_value=mock_gateway)
 
         with (
-            patch("custom_components.ppc_smgw.PPC_SMGW", ppc_cls),
-            patch("custom_components.ppc_smgw.create_async_httpx_client"),
+            patch("custom_components.ppc_smgw_diag.PPC_SMGW", ppc_cls),
+            patch("custom_components.ppc_smgw_diag.create_async_httpx_client"),
             patch(
-                "custom_components.ppc_smgw.async_get_loaded_integration",
+                "custom_components.ppc_smgw_diag.async_get_loaded_integration",
                 return_value=mock_integration,
             ),
             patch.object(hass.config_entries, "async_forward_entry_setups"),
             patch(
-                "custom_components.ppc_smgw.SMGwDataUpdateCoordinator",
+                "custom_components.ppc_smgw_diag.SMGwDataUpdateCoordinator",
                 return_value=mock_coordinator,
             ),
         ):
@@ -164,15 +164,15 @@ class TestInit:
         coordinator_cls = MagicMock(return_value=mock_coordinator)
 
         with (
-            patch("custom_components.ppc_smgw.PPC_SMGW", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.create_async_httpx_client"),
+            patch("custom_components.ppc_smgw_diag.PPC_SMGW", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.create_async_httpx_client"),
             patch(
-                "custom_components.ppc_smgw.async_get_loaded_integration",
+                "custom_components.ppc_smgw_diag.async_get_loaded_integration",
                 return_value=mock_integration,
             ),
             patch.object(hass.config_entries, "async_forward_entry_setups"),
             patch(
-                "custom_components.ppc_smgw.SMGwDataUpdateCoordinator",
+                "custom_components.ppc_smgw_diag.SMGwDataUpdateCoordinator",
                 coordinator_cls,
             ),
         ):
@@ -209,15 +209,15 @@ class TestInit:
         coordinator_cls = MagicMock(return_value=mock_coordinator)
 
         with (
-            patch("custom_components.ppc_smgw.PPC_SMGW", return_value=mock_gateway),
-            patch("custom_components.ppc_smgw.create_async_httpx_client"),
+            patch("custom_components.ppc_smgw_diag.PPC_SMGW", return_value=mock_gateway),
+            patch("custom_components.ppc_smgw_diag.create_async_httpx_client"),
             patch(
-                "custom_components.ppc_smgw.async_get_loaded_integration",
+                "custom_components.ppc_smgw_diag.async_get_loaded_integration",
                 return_value=mock_integration,
             ),
             patch.object(hass.config_entries, "async_forward_entry_setups"),
             patch(
-                "custom_components.ppc_smgw.SMGwDataUpdateCoordinator",
+                "custom_components.ppc_smgw_diag.SMGwDataUpdateCoordinator",
                 coordinator_cls,
             ),
         ):

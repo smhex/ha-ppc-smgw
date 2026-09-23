@@ -11,13 +11,13 @@ from py_ppc_smgw import PPCSMGWClient
 from py_ppc_smgw.types import FirmwareVersion, Meter
 import urllib3
 
-from custom_components.ppc_smgw.gateways.gateway import Gateway
-from custom_components.ppc_smgw.gateways.ppc.const import (
+from custom_components.ppc_smgw_diag.gateways.gateway import Gateway
+from custom_components.ppc_smgw_diag.gateways.ppc.const import (
     DEFAULT_MODEL,
     DEFAULT_NAME,
     MANUFACTURER,
 )
-from custom_components.ppc_smgw.gateways.reading import (
+from custom_components.ppc_smgw_diag.gateways.reading import (
     Information,
     Reading,
     build_fake_information,

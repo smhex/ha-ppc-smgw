@@ -65,7 +65,7 @@ jobs:
 
         - name: "Install integration manifest.json requirements on top"
           run: |
-            mapfile -t reqs < <(jq -r '.requirements[]' custom_components/ppc_smgw/manifest.json)
+            mapfile -t reqs < <(jq -r '.requirements[]' custom_components/ppc_smgw_diag/manifest.json)
             echo "Installing: ${reqs[*]}"
             uv pip install "${reqs[@]}"
 

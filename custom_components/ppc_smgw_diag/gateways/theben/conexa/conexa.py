@@ -4,7 +4,7 @@ import logging
 import httpx
 from obis_parser import OBIS
 
-from custom_components.ppc_smgw.gateways.reading import Information, Reading
+from custom_components.ppc_smgw_diag.gateways.reading import Information, Reading
 
 from ..const import DEFAULT_MODEL, DEFAULT_NAME, MANUFACTURER
 

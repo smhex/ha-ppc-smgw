@@ -61,15 +61,15 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 _STUB_PKGS = [
     ("custom_components", "custom_components"),
-    ("custom_components.ppc_smgw", "custom_components/ppc_smgw"),
-    ("custom_components.ppc_smgw.gateways", "custom_components/ppc_smgw/gateways"),
+    ("custom_components.ppc_smgw_diag", "custom_components/ppc_smgw"),
+    ("custom_components.ppc_smgw_diag.gateways", "custom_components/ppc_smgw_diag/gateways"),
     (
-        "custom_components.ppc_smgw.gateways.emh",
-        "custom_components/ppc_smgw/gateways/emh",
+        "custom_components.ppc_smgw_diag.gateways.emh",
+        "custom_components/ppc_smgw_diag/gateways/emh",
     ),
     (
-        "custom_components.ppc_smgw.gateways.emh.emhcasa",
-        "custom_components/ppc_smgw/gateways/emh/emhcasa",
+        "custom_components.ppc_smgw_diag.gateways.emh.emhcasa",
+        "custom_components/ppc_smgw_diag/gateways/emh/emhcasa",
     ),
 ]
 
@@ -80,7 +80,7 @@ for mod_name, rel_path in _STUB_PKGS:
     sys.modules[mod_name] = mod
 
 _CONST_ATTRS = dict(
-    # absolute import style:  from custom_components.ppc_smgw.const import ...
+    # absolute import style:  from custom_components.ppc_smgw_diag.const import ...
     EMH_DEFAULT_NAME="EMH CASA",
     EMH_MANUFACTURER="EMH Metering",
     EMH_DEFAULT_MODEL="CASA",
@@ -93,11 +93,11 @@ _CONST_ATTRS = dict(
 _READING_ATTRS = dict(OBISCode=OBISCode, Reading=Reading, Information=Information)
 
 for stub_name, attrs in [
-    ("custom_components.ppc_smgw.const", _CONST_ATTRS),
-    ("custom_components.ppc_smgw.gateways.reading", _READING_ATTRS),
+    ("custom_components.ppc_smgw_diag.const", _CONST_ATTRS),
+    ("custom_components.ppc_smgw_diag.gateways.reading", _READING_ATTRS),
     # also register under relative-import-resolved paths
-    ("custom_components.ppc_smgw.gateways.emh.const", _CONST_ATTRS),
-    ("custom_components.ppc_smgw.gateways.emh.reading", _READING_ATTRS),
+    ("custom_components.ppc_smgw_diag.gateways.emh.const", _CONST_ATTRS),
+    ("custom_components.ppc_smgw_diag.gateways.emh.reading", _READING_ATTRS),
 ]:
     mod = types.ModuleType(stub_name)
     mod.__dict__.update(attrs)
@@ -108,13 +108,13 @@ for stub_name, attrs in [
 # ---------------------------------------------------------------------------
 
 _CLIENT_PATH = os.path.join(
-    BASE, "custom_components", "ppc_smgw", "gateways", "emh", "emhcasa", "emh_client.py"
+    BASE, "custom_components", "ppc_smgw_diag", "gateways", "emh", "emhcasa", "emh_client.py"
 )
-_FULL_NAME = "custom_components.ppc_smgw.gateways.emh.emhcasa.emh_client"
+_FULL_NAME = "custom_components.ppc_smgw_diag.gateways.emh.emhcasa.emh_client"
 
 _spec = importlib.util.spec_from_file_location(_FULL_NAME, _CLIENT_PATH)
 _client_mod = importlib.util.module_from_spec(_spec)
-_client_mod.__package__ = "custom_components.ppc_smgw.gateways.emh.emhcasa"
+_client_mod.__package__ = "custom_components.ppc_smgw_diag.gateways.emh.emhcasa"
 sys.modules[_FULL_NAME] = _client_mod
 _spec.loader.exec_module(_client_mod)
 
