@@ -19,6 +19,18 @@ CONF_METER_TYPE = "meter_type"
 
 SENSOR_TYPES = [
     SensorEntityDescription(
+        # EMH CASA publishes the cellular radio signal level as this OBIS value.
+        key="0-0:96.99.0",
+        name="RSSI",
+        suggested_display_precision=0,
+        entity_registry_enabled_default=True,
+        native_unit_of_measurement="dBm",
+        icon="mdi:signal",
+        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    SensorEntityDescription(
         key="1-0:1.8.0",
         name="Import total",
         suggested_display_precision=5,

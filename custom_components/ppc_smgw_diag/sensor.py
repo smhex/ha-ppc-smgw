@@ -23,6 +23,7 @@ from .obis_ha import OBISSensorSpec, build_obis_sensor_description
 
 _LOGGER = logging.getLogger(__name__)
 PARALLEL_UPDATES = 0
+RSSI_OBIS_CODE = "0-0:96.99.0"
 
 
 async def async_setup_entry(
@@ -114,6 +115,22 @@ def _build_dynamic_obis_sensors(
             continue
 
         known_obis_codes.add(key)
+
+        # EMH CASA reports its cellular RSSI as the non-electricity OBIS code
+        # 0-0:96.99.0. It is intentionally exposed as a device diagnostic.
+        if key == RSSI_OBIS_CODE:
+            rssi_description = next(
+                description
+                for description in SENSOR_TYPES
+                if description.key == RSSI_OBIS_CODE
+            )
+            entities.append(
+                OBISSensor(
+                    coordinator=coordinator,
+                    spec=OBISSensorSpec(description=rssi_description),
+                )
+            )
+            continue
 
         if not obis_obj.is_electricity:
             _LOGGER.info(
