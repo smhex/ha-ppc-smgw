@@ -157,6 +157,11 @@ def _remove_stale_static_obis_entities(
 ) -> None:
     registry = er.async_get(hass)
     for description in SENSOR_TYPES:
+        # RSSI is a dynamic diagnostic entity, not a legacy static
+        # import/export sensor. It must not be removed or looked up here.
+        if description.key == RSSI_OBIS_CODE:
+            continue
+
         if description.key in delivered_obis_codes:
             continue
 
