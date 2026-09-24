@@ -260,7 +260,10 @@ class TestSensorPlatformSetup:
             and entity.entity_description.key == "0-0:96.99.0"
         )
         assert rssi_sensor.native_value == -50
-        assert rssi_sensor.entity_description.device_class == SensorDeviceClass.SIGNAL_STRENGTH
+        assert (
+            rssi_sensor.entity_description.device_class
+            == SensorDeviceClass.SIGNAL_STRENGTH
+        )
         assert rssi_sensor.entity_description.native_unit_of_measurement == "dBm"
 
     async def test_dynamic_path_removes_stale_static_obis_entities(
