@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 from unittest.mock import MagicMock
 
-from homeassistant.components.sensor import SensorEntityDescription
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
 from obis_parser import OBIS, OBIS_CATALOG
@@ -234,6 +234,34 @@ class TestSensorPlatformSetup:
         assert obis_sensors[0]._attr_translation_key == "active_energy_import"
         mock_coordinator.async_add_listener.assert_called_once()
         entry.async_on_unload.assert_called_once()
+
+    async def test_dynamic_path_creates_rssi_diagnostic_sensor(
+        self, hass: HomeAssistant, ppc_config_data
+    ):
+        """EMH RSSI is a supported non-electricity OBIS diagnostic."""
+        mock_coordinator = MagicMock()
+        mock_coordinator.data = _information(
+            {"0-0:96.99.0": _reading(-50, "0-0:96.99.0")}
+        )
+        mock_coordinator.async_add_listener = MagicMock(return_value=MagicMock())
+        mock_add_entities = MagicMock()
+        client = MagicMock()
+        client.dynamic_obis_discovery_enabled = True
+
+        entry = _entry_with_runtime_data(ppc_config_data, mock_coordinator, client)
+
+        await async_setup_entry(hass, entry, mock_add_entities)
+
+        entities_list = mock_add_entities.call_args[0][0]
+        rssi_sensor = next(
+            entity
+            for entity in entities_list
+            if isinstance(entity, OBISSensor)
+            and entity.entity_description.key == "0-0:96.99.0"
+        )
+        assert rssi_sensor.native_value == -50
+        assert rssi_sensor.entity_description.device_class == SensorDeviceClass.SIGNAL_STRENGTH
+        assert rssi_sensor.entity_description.native_unit_of_measurement == "dBm"
 
     async def test_dynamic_path_removes_stale_static_obis_entities(
         self, hass: HomeAssistant, ppc_config_data, monkeypatch: pytest.MonkeyPatch
